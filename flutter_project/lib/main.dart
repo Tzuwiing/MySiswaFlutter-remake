@@ -1,8 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/login_page/homepage.dart';
+import 'package:flutter_project/login_page/login.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:lottie/lottie.dart';
-import 'login_page/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
 
         // Halaman tujuan
-        nextScreen: const Login(),
+        nextScreen: Login(),
 
         // Ukuran splash
         splashIconSize: 250,
