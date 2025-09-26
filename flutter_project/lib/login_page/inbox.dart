@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Inbox extends StatelessWidget {
   const Inbox({super.key});
@@ -6,84 +7,87 @@ class Inbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      // 1. Selaraskan background color
+      backgroundColor: Colors.grey[50],
 
-      // AppBar dengan gradasi biar selaras Homepage
+      // 2. Selaraskan AppBar dengan warna solid dan font Poppins
       appBar: AppBar(
-        automaticallyImplyLeading: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.lightBlueAccent, Colors.blueAccent],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+        backgroundColor: Colors.blue[800],
+        elevation: 0,
+        title: Text(
+          "Inbox",
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
-        title: const Text(
-          "Inbox",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
         centerTitle: true,
-        elevation: 0,
+        // Tombol kembali akan muncul otomatis karena halaman ini di-push
       ),
 
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
+          // 3. Selaraskan gaya Card
           child: Card(
-            elevation: 8,
+            color: Colors.white,
+            elevation: 4,
+            shadowColor: Colors.grey.withOpacity(0.2),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(16),
             ),
-            child: Container(
-              padding: const EdgeInsets.all(30),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-              ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    Icons.notifications_off_rounded,
+                    Icons.notifications_off_outlined, // Ikon versi outlined
                     size: 80,
-                    color: Colors.blueAccent.withOpacity(0.4),
+                    color: Colors.grey[300], // Warna lebih soft
                   ),
                   const SizedBox(height: 20),
+                  // 4. Selaraskan semua tipografi menggunakan GoogleFonts
                   Text(
-                    "Tidak ada notifikasi",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.blueAccent[700],
+                    "Tidak Ada Notifikasi",
+                    style: GoogleFonts.poppins(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
                     ),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "Kamu akan melihat update terbaru\njika ada pemberitahuan.",
+                    "Semua pembaruan dan pemberitahuan penting akan muncul di sini.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.grey[600],
+                    ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
 
-                  // Tombol selaras FAB Homepage (pakai amberAccent)
+                  // 5. Tombol "Perbarui" tidak lagi diperlukan untuk halaman kosong
+                  // Jika ingin tetap ada, gayanya harus diselaraskan:
                   ElevatedButton.icon(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.amberAccent,
+                      backgroundColor: Colors.blue[800],
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 24,
                         vertical: 12,
                       ),
                     ),
-                    icon: const Icon(Icons.refresh, color: Colors.black87),
-                    label: const Text(
+                    icon: const Icon(Icons.refresh, color: Colors.white),
+                    label: Text(
                       "Perbarui",
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
@@ -92,14 +96,8 @@ class Inbox extends StatelessWidget {
           ),
         ),
       ),
-
-      // BottomAppBar biar konsisten
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
-        color: Colors.pinkAccent,
-        child: SizedBox(height: 50), // hanya baris kosong (tanpa item)
-      ),
+      // 6. BottomAppBar dihapus karena tidak diperlukan di halaman sekunder
+      // Ini membuat UI lebih bersih dan fokus.
     );
   }
 }

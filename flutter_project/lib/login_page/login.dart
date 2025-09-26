@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_project/login_page/homepage.dart';
 import 'package:flutter_project/login_page/register.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,22 +18,21 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      // 1. Samakan background color
+      backgroundColor: Colors.grey[50],
 
-      // AppBar gradasi
+      // 2. Samakan desain AppBar
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.lightBlueAccent, Colors.blueAccent],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+        backgroundColor: Colors.blue[800],
+        elevation: 0,
+        title: Text(
+          "Login",
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
-        title: const Text("Login", style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        elevation: 0,
       ),
 
       body: SingleChildScrollView(
@@ -41,40 +40,48 @@ class _LoginState extends State<Login> {
           padding: const EdgeInsets.all(25),
           child: Column(
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 40),
 
-              // Judul
+              // 3. Samakan style judul dan subjudul
               Text(
                 "Selamat Datang 👋",
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent[700],
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 "Silakan masuk ke akunmu",
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
 
-              // Card untuk form login
+              // 4. Samakan style Card
               Card(
-                elevation: 6,
+                color: Colors.white,
+                elevation: 4,
+                shadowColor: Colors.grey.withOpacity(0.2),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(25),
                   child: Column(
                     children: [
+                      // 5. Samakan style TextField
                       TextField(
                         controller: usernameController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: "Username",
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.person),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon: const Icon(Icons.person_outline),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -83,8 +90,10 @@ class _LoginState extends State<Login> {
                         obscureText: _obsecured,
                         decoration: InputDecoration(
                           labelText: "Password",
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.lock),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -101,7 +110,7 @@ class _LoginState extends State<Login> {
                       ),
                       const SizedBox(height: 30),
 
-                      // Tombol login pakai amberAccent biar matching
+                      // 6. Samakan style Tombol Login
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -120,24 +129,23 @@ class _LoginState extends State<Login> {
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content:
-                                      Text("Username atau password salah"),
+                                  content: Text("Username atau password salah"),
                                   duration: Duration(seconds: 2),
                                 ),
                               );
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.amberAccent,
-                            padding: const EdgeInsets.all(17),
+                            backgroundColor: Colors.blue[800],
+                            padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const Text(
+                          child: Text(
                             "Login",
-                            style: TextStyle(
-                              color: Colors.black87,
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -151,7 +159,7 @@ class _LoginState extends State<Login> {
 
               const SizedBox(height: 25),
 
-              // Sign Up
+              // 7. Samakan style teks navigasi ke Register
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -160,13 +168,15 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Register()),
+                        MaterialPageRoute(
+                          builder: (context) => const Register(),
+                        ),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Sign Up",
                       style: TextStyle(
-                        color: Colors.lightBlueAccent,
+                        color: Colors.blue[800],
                         fontWeight: FontWeight.bold,
                       ),
                     ),

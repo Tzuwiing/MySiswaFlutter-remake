@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/login_page/homepage.dart';
 import 'package:flutter_project/login_page/login.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts untuk desain yang lebih baik
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -20,53 +21,50 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    // Desain ulang untuk konsistensi dengan halaman lainnya
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-
-      // AppBar gradasi
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.lightBlueAccent, Colors.blueAccent],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+        backgroundColor: Colors.blue[800],
+        elevation: 0,
+        title: Text(
+          "Register",
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
-        title: const Text("Register", style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        elevation: 0,
       ),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(25),
           child: Column(
             children: [
-              const SizedBox(height: 40),
-
-              // Judul
+              const SizedBox(height: 20),
               Text(
-                "Buat Akunmu ✨",
-                style: TextStyle(
+                "Buat Akun Baru ✨",
+                style: GoogleFonts.poppins(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent[700],
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 "Isi data dengan benar untuk melanjutkan",
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                ),
               ),
-              const SizedBox(height: 40),
-
-              // Card untuk form register
+              const SizedBox(height: 30),
               Card(
-                elevation: 6,
+                color: Colors.white,
+                elevation: 4,
+                shadowColor: Colors.grey.withOpacity(0.2),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(25),
@@ -75,10 +73,12 @@ class _RegisterState extends State<Register> {
                       // Username
                       TextField(
                         controller: usernameController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: "Username",
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.person),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon: const Icon(Icons.person_outline),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -89,8 +89,10 @@ class _RegisterState extends State<Register> {
                         obscureText: _obsecured,
                         decoration: InputDecoration(
                           labelText: "Password",
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.lock),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -113,7 +115,9 @@ class _RegisterState extends State<Register> {
                         obscureText: _obsecuredConfirm,
                         decoration: InputDecoration(
                           labelText: "Confirm Password",
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             onPressed: () {
@@ -131,21 +135,34 @@ class _RegisterState extends State<Register> {
                       ),
                       const SizedBox(height: 30),
 
-                      // Tombol Register (amberAccent biar selaras)
+                      // Tombol Register
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
+                            String username = usernameController.text;
                             String password = passwordController.text;
                             String confirmPassword =
                                 confirmpasswordController.text;
 
+                            // Validasi agar username tidak kosong
+                            if (username.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Username tidak boleh kosong!"),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                              return; // Hentikan eksekusi jika username kosong
+                            }
+
                             if (password == confirmPassword) {
+                              // Navigasi dengan data username yang benar
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Homepage(
-                                    username: AutofillHints.username,
+                                    username: username, // DIKIRIM KE HOMEPAGE
                                   ),
                                 ),
                               );
@@ -159,16 +176,16 @@ class _RegisterState extends State<Register> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.amberAccent,
-                            padding: const EdgeInsets.all(17),
+                            backgroundColor: Colors.blue[800],
+                            padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const Text(
+                          child: Text(
                             "Register",
-                            style: TextStyle(
-                              color: Colors.black87,
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -194,10 +211,10 @@ class _RegisterState extends State<Register> {
                         MaterialPageRoute(builder: (context) => const Login()),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Login",
                       style: TextStyle(
-                        color: Colors.lightBlueAccent,
+                        color: Colors.blue[800],
                         fontWeight: FontWeight.bold,
                       ),
                     ),
