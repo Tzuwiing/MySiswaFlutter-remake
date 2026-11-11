@@ -186,6 +186,3 @@ Jalankan pengujian Flutter yang tersedia dengan perintah:
 flutter test
 ```
 
-## Lisensi
-
-Belum ada informasi lisensi khusus yang dicantumkan pada source code proyek ini. Tambahkan file `LICENSE` apabila proyek akan dibagikan atau digunakan oleh pihak lain dengan ketentuan lisensi tertentu.
